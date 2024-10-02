@@ -32,23 +32,19 @@ function operate() {
 
   if (operator == "+") {
     result = add(operationNumbers[0], operationNumbers[1]);
-    display.value = result;
-    displayValue = result;
+    setDisplay(result);
   }
   if (operator == "-") {
     result = subtract(operationNumbers[0], operationNumbers[1]);
-    display.value = result;
-    displayValue = result;
+    setDisplay(result);
   }
   if (operator == "x") {
     result = multiply(operationNumbers[0], operationNumbers[1]);
-    display.value = result;
-    displayValue = result;
+    setDisplay(result);
   }
   if (operator == "/") {
     result = divide(operationNumbers[0], operationNumbers[1]);
-    display.value = result;
-    displayValue = result;
+    setDisplay(result);
   }
 
   toggleButtons("enable", ".operator-button");
@@ -56,6 +52,16 @@ function operate() {
 
 const display = document.getElementById("display");
 display.value = displayValue;
+
+function setDisplay(input) {
+  display.value = input;
+  displayValue = input;
+}
+
+function appendToDisplay(input) {
+  display.value += input;
+  displayValue += input;
+}
 
 function toggleButtons(action, selector) {
   const buttons = document.querySelectorAll(selector);
@@ -73,8 +79,7 @@ function toggleButtons(action, selector) {
 let d = 0;
 
 function appendNumber(input) {
-  display.value += input;
-  displayValue += input;
+  appendToDisplay(input);
   toggleButtons("enable", ".operator-button");
 }
 
@@ -83,22 +88,18 @@ function appendOperator(input) {
     operate();
   }
 
-  display.value += input;
-  displayValue += input;
-
+  appendToDisplay(input);
   toggleButtons("disable", ".operator-button");
 }
 
 function appendDecimal(input) {
-  display.value += input;
-  displayValue += input;
+  appendToDisplay(input);
   // Disable button
   toggleButtons("disable", "#decimal");
 }
 
 function clearDisplay() {
-  display.value = "";
-  displayValue = "";
+  appendToDisplay(input);
   toggleButtons("disable", ".operator-button");
 }
 
