@@ -1,9 +1,6 @@
 // NOTE: I tried to follow the instructions as best as my understanding and ability allow me.
 // This being said, I'd do some things differently.
 
-let number1;
-let operator;
-let number2;
 let displayValue = "";
 
 function add(num1, num2) {
@@ -23,10 +20,14 @@ function divide(num1, num2) {
 }
 
 function operate() {
-    displayValue = display.value;
-    operator = /\+|-|x|\//.exec(displayValue);
-    let operationNumbers = displayValue.split(operator).map(element => Number(element));
-    
+  displayValue = display.value;
+  // Regex to get the operator
+  let operator = /\+|-|x|\//.exec(displayValue);
+  // Create an array with the numbers of the operation and convert them to integrals
+  let operationNumbers = displayValue
+    .split(operator)
+    .map((element) => Number(element));
+
   if (operator == "+") {
     display.value = add(operationNumbers[0], operationNumbers[1]);
   }
@@ -39,44 +40,54 @@ function operate() {
   if (operator == "/") {
     display.value = divide(operationNumbers[0], operationNumbers[1]);
   }
+
+  toggleOperatorButtons("enable");
 }
 
+const operatorButtons = document.getElementsByClassName("operator-button");
+const decimalButton = document.getElementById("decimal");
 const display = document.getElementById("display");
 display.value = displayValue;
 
-let clickedButton = null;
-const buttons = document.querySelectorAll('.operator-button, #decimal');
-
-// Add event listener to each button
-buttons.forEach(button => {
-    button.addEventListener('click', function(event) {
-        handleButtonClick(event);
-    });
-});
-
-function handleButtonClick(event) {
-    // "event.target" refers to the button that was clicked
-    clickedButton = event.target;
-    console.log("Button clicked:", clickedButton);
+function toggleOperatorButtons(action) {
+  for (let i = 0; i < operatorButtons.length; i++) {
+    if (action == "enable") {
+      operatorButtons[i].removeAttribute("disabled");
+    } else if (action == "disable") {
+      operatorButtons[i].setAttribute("disabled", "disabled");
+    }
+  }
 }
 
+// This variables are used to enable operators one time only
+// after a number has been pressed. The objective being to do
+// one operation at once, as the instructions say.
+let d = 0;
+let o = 0;
+
 function appendNumber(input) {
-    display.value += input;
+  display.value += input;
+  if (o == 0) {
+    toggleOperatorButtons("enable");
+    o++;
+  }
 }
 
 function appendOperator(input) {
-    display.value += input;
-    // If there's an operator in display, call operate
-    // Enable decimal button
-    // Disable other operators (except =; change css)
+  display.value += input;
+  toggleOperatorButtons("disable");
 }
 
 function appendDecimal(input) {
-    display.value += input;
-    // Disable button
-    clickedButton.setAttribute("disabled", "disabled");
+  display.value += input;
+  // Disable button
+  //clickedButton.setAttribute("disabled", "disabled");
 }
 
 function clearDisplay() {
-    display.value = "";
+  display.value = "";
+  o = 0;
+  toggleOperatorButtons("disable");
 }
+
+toggleOperatorButtons("disable");

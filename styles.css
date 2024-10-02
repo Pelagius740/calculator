@@ -53,11 +53,11 @@ button {
 }
 
 .operator-button, #equal {
-  background-color: lightsalmon;
+  background-color: lightblue;
 }
 
 .special-button {
-  background-color: lightgreen;
+  background-color: lightsalmon;
 }
 
 #equal {
