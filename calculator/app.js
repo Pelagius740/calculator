@@ -99,4 +99,13 @@ function clearDisplay() {
   toggleButtons("enable", "#decimal");
 }
 
+function backspace() {
+  lastChar = displayValue.slice(-1);
+  newDisplayValue = displayValue.slice(0, -1);
+  setDisplay(newDisplayValue);
+  if (operatorRegex.test(lastChar) == true) {
+    toggleButtons("enable", ".operator-button");
+  }
+}
+
 toggleButtons("disable", ".operator-button");
