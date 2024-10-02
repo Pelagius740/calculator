@@ -1,7 +1,7 @@
 // NOTE: I tried to follow the instructions as best as my understanding and ability allow me.
 // This being said, I'd do some things differently.
 
-let displayValue = "";
+let displayValue;
 const operatorRegex = /\+|-|x|\//;
 
 function add(num1, num2) {
@@ -21,7 +21,6 @@ function divide(num1, num2) {
 }
 
 function operate() {
-  //displayValue = display.value;
   // Regex to get the operator
   let operator = operatorRegex.exec(displayValue);
   // Create an array with the numbers of the operation and convert them to integrals
@@ -51,7 +50,7 @@ function operate() {
 }
 
 const display = document.getElementById("display");
-display.value = displayValue;
+setDisplay("");
 
 function setDisplay(input) {
   display.value = input;
@@ -74,10 +73,6 @@ function toggleButtons(action, selector) {
   }
 }
 
-// This variable is used to avoid putting multiple decimals
-// in one number.
-let d = 0;
-
 function appendNumber(input) {
   appendToDisplay(input);
   toggleButtons("enable", ".operator-button");
@@ -90,17 +85,18 @@ function appendOperator(input) {
 
   appendToDisplay(input);
   toggleButtons("disable", ".operator-button");
+  toggleButtons("enable", "#decimal");
 }
 
 function appendDecimal(input) {
   appendToDisplay(input);
-  // Disable button
   toggleButtons("disable", "#decimal");
 }
 
 function clearDisplay() {
-  appendToDisplay(input);
+  setDisplay("");
   toggleButtons("disable", ".operator-button");
+  toggleButtons("enable", "#decimal");
 }
 
 toggleButtons("disable", ".operator-button");
