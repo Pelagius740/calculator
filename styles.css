@@ -52,6 +52,10 @@ button {
   border-radius: 5px;
 }
 
+button:disabled {
+  background-color: lightgray;
+}
+
 .operator-button, #equal {
   background-color: lightblue;
 }

@@ -2,6 +2,7 @@
 // This being said, I'd do some things differently.
 
 let displayValue = "";
+const operatorRegex = /\+|-|x|\//;
 
 function add(num1, num2) {
   return num1 + num2;
@@ -20,74 +21,85 @@ function divide(num1, num2) {
 }
 
 function operate() {
-  displayValue = display.value;
+  //displayValue = display.value;
   // Regex to get the operator
-  let operator = /\+|-|x|\//.exec(displayValue);
+  let operator = operatorRegex.exec(displayValue);
   // Create an array with the numbers of the operation and convert them to integrals
   let operationNumbers = displayValue
     .split(operator)
     .map((element) => Number(element));
+  let result;
 
   if (operator == "+") {
-    display.value = add(operationNumbers[0], operationNumbers[1]);
+    result = add(operationNumbers[0], operationNumbers[1]);
+    display.value = result;
+    displayValue = result;
   }
   if (operator == "-") {
-    display.value = subtract(operationNumbers[0], operationNumbers[1]);
+    result = subtract(operationNumbers[0], operationNumbers[1]);
+    display.value = result;
+    displayValue = result;
   }
   if (operator == "x") {
-    display.value = multiply(operationNumbers[0], operationNumbers[1]);
+    result = multiply(operationNumbers[0], operationNumbers[1]);
+    display.value = result;
+    displayValue = result;
   }
   if (operator == "/") {
-    display.value = divide(operationNumbers[0], operationNumbers[1]);
+    result = divide(operationNumbers[0], operationNumbers[1]);
+    display.value = result;
+    displayValue = result;
   }
 
-  toggleOperatorButtons("enable");
+  toggleButtons("enable", ".operator-button");
 }
 
-const operatorButtons = document.getElementsByClassName("operator-button");
-const decimalButton = document.getElementById("decimal");
 const display = document.getElementById("display");
 display.value = displayValue;
 
-function toggleOperatorButtons(action) {
-  for (let i = 0; i < operatorButtons.length; i++) {
+function toggleButtons(action, selector) {
+  const buttons = document.querySelectorAll(selector);
+  for (let i = 0; i < buttons.length; i++) {
     if (action == "enable") {
-      operatorButtons[i].removeAttribute("disabled");
+      buttons[i].removeAttribute("disabled");
     } else if (action == "disable") {
-      operatorButtons[i].setAttribute("disabled", "disabled");
+      buttons[i].setAttribute("disabled", "disabled");
     }
   }
 }
 
-// This variables are used to enable operators one time only
-// after a number has been pressed. The objective being to do
-// one operation at once, as the instructions say.
+// This variable is used to avoid putting multiple decimals
+// in one number.
 let d = 0;
-let o = 0;
 
 function appendNumber(input) {
   display.value += input;
-  if (o == 0) {
-    toggleOperatorButtons("enable");
-    o++;
-  }
+  displayValue += input;
+  toggleButtons("enable", ".operator-button");
 }
 
 function appendOperator(input) {
+  if (operatorRegex.test(displayValue) === true) {
+    operate();
+  }
+
   display.value += input;
-  toggleOperatorButtons("disable");
+  displayValue += input;
+
+  toggleButtons("disable", ".operator-button");
 }
 
 function appendDecimal(input) {
   display.value += input;
+  displayValue += input;
   // Disable button
-  //clickedButton.setAttribute("disabled", "disabled");
+  toggleButtons("disable", "#decimal");
 }
 
 function clearDisplay() {
   display.value = "";
-  o = 0;
-  toggleOperatorButtons("disable");
+  displayValue = "";
+  toggleButtons("disable", ".operator-button");
 }
 
-toggleOperatorButtons("disable");
+toggleButtons("disable", ".operator-button");
