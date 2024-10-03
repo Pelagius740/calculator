@@ -1,9 +1,6 @@
 // NOTE: I tried to follow the instructions as best as my understanding and ability allow me.
 // This being said, I'd do some things differently.
 
-let displayValue;
-const operatorRegex = /\+|-|x|\//;
-
 function add(num1, num2) {
   return num1 + num2;
 }
@@ -42,24 +39,33 @@ function operate() {
     setDisplay(result);
   }
   if (operator == "/") {
+    if (operationNumbers[1] == "0") {
+      setDisplay("¯\\_(ツ)_/¯");
+      return;
+    }
     result = divide(operationNumbers[0], operationNumbers[1]);
     setDisplay(result);
+  }
+
+  if (result.length >= 24) {
+    setDisplay("ERROR!");
+    return;
   }
 
   toggleButtons("enable", ".operator-button");
 }
 
-const display = document.getElementById("display");
-setDisplay("");
-
 function setDisplay(input) {
   display.value = input;
-  displayValue = input;
+  displayValue = input.toString();
 }
 
 function appendToDisplay(input) {
+  if (/[0-9]/.test(display.value) === false) {
+    setDisplay("");
+  }
   display.value += input;
-  displayValue += input;
+  displayValue += input.toString();
 }
 
 function toggleButtons(action, selector) {
@@ -79,7 +85,7 @@ function appendNumber(input) {
 }
 
 function appendOperator(input) {
-  if (operatorRegex.test(displayValue) === true) {
+  if (operatorRegex.test(displayValue)) {
     operate();
   }
 
@@ -107,5 +113,11 @@ function backspace() {
     toggleButtons("enable", ".operator-button");
   }
 }
+
+const operatorRegex = /\+|-|x|\//;
+
+let displayValue;
+const display = document.getElementById("display");
+setDisplay("");
 
 toggleButtons("disable", ".operator-button");
