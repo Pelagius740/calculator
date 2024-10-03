@@ -1,3 +1,51 @@
 body {
-    background-color: #1f2937;
+  background-color: #1f2937;
+}
+
+#main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+h1,
+h2 {
+  font-family: "Alexandria";
+  color: white;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+button {
+  font-size: 25px;
+  color: white;
+  font-family: "Amiko";
+  font-weight: 600;
+  background-color: rgb(31, 139, 31);
+  box-shadow: rgba(19, 117, 1, 0.4) 0 2px 4px,
+    rgba(19, 117, 1, 0.3) 0 7px 13px -3px, rgba(19, 117, 1, 0.5) 0 -3px 0 inset;
+  transition: box-shadow 0.15s, transform 0.15s;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  width: 200px;
+}
+
+button:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+    rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #22a928 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+button:active {
+  box-shadow: #22a928 0 3px 7px inset;
+  transform: translateY(2px);
 }

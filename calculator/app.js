@@ -80,6 +80,15 @@ function toggleButtons(action, selector) {
   }
 }
 
+document.querySelectorAll("button").forEach((button) => {
+  button.addEventListener("click", function () {
+    this.classList.toggle("clicked");
+    setTimeout(() => {
+      this.classList.remove("clicked");
+    }, 150);
+  });
+});
+
 function appendNumber(input) {
   appendToDisplay(input);
   toggleButtons("enable", ".operator-button");
@@ -96,8 +105,10 @@ function appendOperator(input) {
 }
 
 function appendDecimal(input) {
-  appendToDisplay(input);
-  toggleButtons("disable", "#decimal");
+  if (displayValue != "") {
+    appendToDisplay(input);
+    toggleButtons("disable", "#decimal");
+  }
 }
 
 function clearDisplay() {
