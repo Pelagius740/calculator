@@ -28,15 +28,12 @@ function operate() {
 
   if (operator == "+") {
     result = add(operationNumbers[0], operationNumbers[1]);
-    setDisplay(result);
   }
   if (operator == "-") {
     result = subtract(operationNumbers[0], operationNumbers[1]);
-    setDisplay(result);
   }
   if (operator == "x") {
     result = multiply(operationNumbers[0], operationNumbers[1]);
-    setDisplay(result);
   }
   if (operator == "/") {
     if (operationNumbers[1] == "0") {
@@ -44,14 +41,18 @@ function operate() {
       return;
     }
     result = divide(operationNumbers[0], operationNumbers[1]);
-    setDisplay(result);
   }
 
-  if (result.length >= 24) {
+  if (/\./.test(result) && !/e/.test(result)) {
+    result = result.toFixed(5);
+  }
+
+  if (result.length > 23) {
     setDisplay("ERROR!");
     return;
   }
 
+  setDisplay(result);
   toggleButtons("enable", ".operator-button");
 }
 
