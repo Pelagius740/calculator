@@ -1,0 +1,31 @@
+* Calculator exercise
+
+See the calculator [[https://pelagius740.github.io/calculator/][here]].
+
+This is a [[https://www.theodinproject.com/lessons/foundations-calculator][calculator exercise]] that I did from the Foundations Course in [[https://www.theodinproject.com/][The Odin Project]]. The instructions to follow are these:
+
+** Main tasks
+  - [X] Avoid using the eval() function.
+  - [X] Avoid using new Function() to evaluate strings.
+  - [X] Create functions for basic math operators:
+    - [X] add
+    - [X] subtract
+    - [X] multiply
+    - [X] divide
+  - [ ] Create a function operate that takes an operator and 2 numbers.
+  - [X] Add a “clear” button.
+  - [X] Create functions to populate the display when number buttons are clicked.
+  - [X] Store the first number, second number, and operator.
+  - [X] Call operate() on the two numbers when “=” is pressed.
+  - [X] Update the display with the solution.
+  - [X] Ensure the calculator evaluates only a single pair of numbers at a time.
+  - [X] Round answers with long decimals.
+  - [ ] Handle cases where = is pressed before entering all numbers or an operator.
+  - [X] Ensure “clear” wipes out existing data.
+  - [X] Display an error message for division by 0.
+** Extra credit
+  - [X] Add a . button for decimal input.
+  - [X] Disable the decimal button if there’s already one in the display.
+  - [X] Improve CSS to differentiate operations from keypad buttons.
+  - [X] Add a “backspace” button.
+  - [ ] Add keyboard support.
