@@ -2,19 +2,19 @@
 // This being said, I'd do some things differently.
 
 function add(num1, num2) {
-  return num1 + num2;
+  return (Math.floor(( num1 + num2 )*1000))/1000;
 }
 
 function subtract(num1, num2) {
-  return num1 - num2;
+  return (Math.floor(( num1 - num2 )*1000))/1000;
 }
 
 function multiply(num1, num2) {
-  return num1 * num2;
+  return (Math.floor(( num1 * num2 )*1000))/1000;
 }
 
 function divide(num1, num2) {
-  return num1 / num2;
+  return (Math.floor(( num1 / num2 )*1000))/1000;
 }
 
 function operate() {
@@ -42,11 +42,8 @@ function operate() {
     }
     result = divide(operationNumbers[0], operationNumbers[1]);
   }
-
-  if (/\./.test(result) && !/e/.test(result)) {
-    result = result.toFixed(5);
-  }
-
+  
+  // Not needed based on my tests, but since it's a requirement...
   if (result.length > 23) {
     setDisplay("ERROR!");
     return;
@@ -124,7 +121,7 @@ function backspace() {
   if (operatorRegex.test(lastChar) == true) {
     toggleButtons("enable", ".operator-button");
   }
-}
+} 
 
 const operatorRegex = /\+|-|x|\//;
 
