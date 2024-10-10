@@ -43,8 +43,10 @@ function operate() {
     result = divide(operationNumbers[0], operationNumbers[1]);
   }
 
-  // Not needed based on my tests, but since it's a requirement...
-  if (result.length > 23) {
+  console.log('Result: ' + result);
+  console.log('Result length: ' + String(result).length);
+
+  if (String(result).length > 12) {
     setDisplay("ERROR!");
     return;
   }

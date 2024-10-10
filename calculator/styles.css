@@ -1,80 +1,93 @@
 body {
-  background-color: hsl(248, 47%, 27%);
+  background-color: #f0f0f0;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
 #main-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 #calc-body {
   display: flex;
   flex-direction: column;
-  border: 3px solid violet;
-  width: 600px;
-  height: 500px;
-  margin-top: 5%;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 320px;
 }
 
 #display-container {
   display: flex;
-  background-color: darkblue;
+  background-color: #333;
   width: 100%;
-  height: 20%;
+  height: 80px;
   justify-content: center;
   align-items: center;
 }
 
 #display-container input {
-  background-color: white;
-  height: 70%;
-  width: 92.6%;
-  vertical-align: middle;
+  background-color: #333;
+  color: #fff;
+  height: 100%;
+  width: 90%;
   border: none;
   text-align: right;
-  border-radius: 5px;
-  font-size: 40px;
+  font-size: 2em;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .buttons-container {
   display: grid;
-  grid-template-columns: repeat(4, auto);
-  background-color: teal;
-  height: 80%;
-  width: 100%;
-  gap: 2%;
-  padding: 20px;
-  box-sizing: border-box;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #fff;
+  gap: 1px;
 }
 
 button {
-  background-color: lightgoldenrodyellow;
+  background-color: #f9f9f9;
   border: none;
-  font-size: 30px;
-  border-radius: 5px;
+  font-size: 1.5em;
+  padding: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #e0e0e0;
+}
+
+button:active {
+  background-color: #d0d0d0;
 }
 
 button:disabled {
   background-color: lightgray;
 }
 
-button:hover {
-  box-shadow: 0 0 10px white;
-}
-
 button.clicked {
-  background-color: gray;
+  background-color: #999999;
   transition: background-color 25ms ease;
 }
 
 .operator-button,
 #equal {
-  background-color: lightblue;
+  background-color: #ff9500;
+  color: #fff;
 }
 
 .special-button {
-  background-color: lightsalmon;
+  background-color: #ff3b30;
+  color: #fff;
 }
 
 #equal {
